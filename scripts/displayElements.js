@@ -5,7 +5,7 @@ function showView(viewName) {
 
 function showHideMenuLinks() {
     $("#linkHome").show()
-    if (sessionStorage.getItem('authToken') === null) { // No logged in user
+    if (getCookie(`authToken`) === null) { // No logged in user
         $("#linkLogin").show()
         $("#linkRegister").show()
         $("#linkListBooks").hide()
@@ -17,7 +17,7 @@ function showHideMenuLinks() {
         $("#linkListBooks").show()
         $("#linkCreateBook").show()
         $("#linkLogout").show()
-        $('#loggedInUser').text("Welcome, " + sessionStorage.getItem('username') + "!").css('color', '#FFFFFF')
+        $('#loggedInUser').text("Welcome, " + getCookie('username') + "!").css('color', '#FFFFFF')
     }
 }
 

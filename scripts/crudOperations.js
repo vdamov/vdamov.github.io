@@ -34,9 +34,9 @@ function listBooks() {
     $.ajax({
         method: 'GET',
         url: BASE_URL + 'appdata/' + APP_KEY + '/books',
-        headers: {Authorization: 'Kinvey ' + sessionStorage.authToken}
+        headers: {Authorization: 'Kinvey ' + getCookie('authToken')}
     }).then(function (res) {
-        displayPaginationAndBooks(res.reverse())
+        displayPaginationAndBooks(res)
     }).catch(handleAjaxError)
 }
 
@@ -50,7 +50,7 @@ function createBook() {
     $.ajax({
         method: "POST",
         url: BASE_URL + 'appdata/' + APP_KEY + '/books',
-        headers: {'Authorization': "Kinvey " + sessionStorage.authToken},
+        headers: {'Authorization': "Kinvey " + getCookie('authToken')},
         data: {title, author, description}
     }).done(function () {
         listBooks();
@@ -62,7 +62,7 @@ function deleteBook(book) {
     $.ajax({
         method: "DELETE",
         url: BASE_URL + 'appdata/' + APP_KEY + '/books/' + book._id,
-        headers: {'Authorization': "Kinvey " + sessionStorage.authToken}
+        headers: {'Authorization': "Kinvey " + getCookie('authToken')}
     }).done(function () {
         listBooks();
         showInfo('Book deleted.')
@@ -86,7 +86,7 @@ function editBook() {
     $.ajax({
         method: "PUT",
         url: BASE_URL + 'appdata/' + APP_KEY + '/books/' + id,
-        headers: {'Authorization': "Kinvey " + sessionStorage.authToken},
+        headers: {'Authorization': "Kinvey " + getCookie('authToken')},
         data: {title, author, description}
     }).done(function () {
         listBooks();
@@ -95,18 +95,25 @@ function editBook() {
 }
 
 function saveAuthInSession(userInfo) {
-    sessionStorage.setItem('authToken', userInfo._kmd.authtoken);
-    sessionStorage.setItem('username', userInfo.username);
-    sessionStorage.setItem('userId', userInfo._id);
+    setCookie(`authToken`, userInfo._kmd.authtoken, 1);
+    setCookie(`username`, userInfo.username, 1);
+    setCookie(`userId`, userInfo._id, 1);
+
+
+    // sessionStorage.setItem('authToken', userInfo._kmd.authtoken);
+    // sessionStorage.setItem('username', userInfo.username);
+    // sessionStorage.setItem('userId', userInfo._id);
 }
 
 function logoutUser() {
     $.ajax({
         method: 'POST',
         url: BASE_URL + 'user/' + APP_KEY + '/_logout',
-        headers: {'Authorization': "Kinvey " + sessionStorage.authToken},
-    }).done(function (res) {
-        sessionStorage.clear();
+        headers: {'Authorization': "Kinvey " + getCookie('authToken')},
+    }).done(function () {
+        eraseCookie(`authToken`);
+        eraseCookie(`username`);
+        eraseCookie(`userId`);
         showHideMenuLinks();
         $('#loggedInUser').text("");
         showHomeView();
@@ -122,6 +129,11 @@ function signInUser(res, message) {
 }
 
 function displayPaginationAndBooks(books) {
+    books = books.sort(function (a, b) {
+        let d1 = new Date(a._kmd.lmt)
+        let d2 = new Date(b._kmd.lmt)
+        return d2 - d1;
+    });
     showView('viewBooks')
     let pagination = $('#pagination-demo')
     if (pagination.data("twbs-pagination")) {
@@ -146,7 +158,7 @@ function displayPaginationAndBooks(books) {
                     `<td>${books[i].author}</td>` +
                     `<td>${books[i].description}</td>`);
                 $('#books > table').append(tr);
-                if (books[i]._acl.creator === sessionStorage.getItem("userId")) {
+                if (books[i]._acl.creator === getCookie(`userId`)) {
                     let aDel = $('<button>Delete</button>').on('click', function () {
                         deleteBook(books[i])
                     });
@@ -158,6 +170,31 @@ function displayPaginationAndBooks(books) {
             }
         }
     })
+}
+
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    setCookie(name, "", -1);
 }
 
 function handleAjaxError(response) {
