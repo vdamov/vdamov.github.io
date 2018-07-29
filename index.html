@@ -1,168 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="scripts/jquery-3.3.1.js.js"></script>
-    <script src="scripts/bootstrap.js"></script>
-    <link rel="stylesheet" href="styles/style.css" type="text/css">
-    <meta charset="UTF-8">
-    <title>My Blog</title>
-</head>
-<body>
-<header>
-    <div class="navbar navbar-default navbar-fixed-top text-uppercase">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="index.html" class="navbar-brand">SoftUni Blog</a>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="login.html">Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</header>
-<main>
-    <div class="container body-content">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="images/sophia.jpg" alt="" width=100% class="img-thumbnail">
-                    <article>
-                        <header>
-                            <h2>Sofia - the social Robot?</h2>
-                        </header>
-                        <p>
-                            Sophia is a social humanoid robot developed by Hong Kong-based company Hanson Robotics.
-                            Sophia
-                            was activated on April 19, 2015 and made her first public appearance at South by Southwest
-                            Festival (SXSW) in mid-March 2016 in Austin, Texas, United States. She is able to display
-                            more than 62 facial expressions.
-                        </p>
-                        <p>
-                            Sophia has been covered by media around the globe and has participated in many high-profile
-                            interviews. While interviewers around the world have been impressed by the sophistication of
-                            many of Sophia's responses to their questions, the bulk of Sophia's meaningful statements
-                            are
-                            believed by experts to be somewhat scripted.
-                        </p>
-                        <p>
-                            In October 2017, the robot became a Saudi Arabian citizen, the first robot to receive
-                            citizenship of any country. In November 2017, Sophia was named the United Nations
-                            Development
-                            Programme's first ever Innovation Champion, and the first non-human to be given any United
-                            Nations title.
-                        </p>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Book Library</title>
+		<script src="scripts/jquery-3.1.1.min.js"></script>
+		<script src="scripts/displayElements.js"></script>
+		<script src="scripts/crudOperations.js"></script>
+		<script src="scripts/attachEvents.js"></script>
+		<script src="scripts/app.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.1/jquery.twbsPagination.js"></script>
+		<link rel="stylesheet" type="text/css" href="styles/pagination.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/book-library.css" />
+	</head>
+	
+    <body onload="startApp()">
+        <header id="menu">
+            <a href="#" id="linkHome">Home</a>
+            <a href="#" id="linkLogin">Login</a>
+            <a href="#" id="linkRegister">Register</a>
+            <a href="#" id="linkListBooks">List Books</a>
+            <a href="#" id="linkCreateBook">Create Book</a>
+            <a href="#" id="linkLogout">Logout</a>
+            <span id="loggedInUser"></span>
+        </header>
 
-                        <footer>
-                            <small class="author">
-                                Vladimir Damov
-                            </small>
-                            <div class="text-right">
-                                <a href="viewpost.html" class="btn btn-primary btn-xs">Read more &raquo;</a>
-                            </div>
-                            <br>
-                        </footer>
-                    </article>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="images/sophia.jpg" alt="" width=100% class="img-thumbnail">
-                    <article>
-                        <header>
-                            <h2>Sofia - the social Robot?</h2>
-                        </header>
-                        <p>
-                            Sophia is a social humanoid robot developed by Hong Kong-based company Hanson Robotics.
-                            Sophia
-                            was activated on April 19, 2015 and made her first public appearance at South by Southwest
-                            Festival (SXSW) in mid-March 2016 in Austin, Texas, United States. She is able to display
-                            more than 62 facial expressions.
-                        </p>
-                        <p>
-                            Sophia has been covered by media around the globe and has participated in many high-profile
-                            interviews. While interviewers around the world have been impressed by the sophistication of
-                            many of Sophia's responses to their questions, the bulk of Sophia's meaningful statements
-                            are
-                            believed by experts to be somewhat scripted.
-                        </p>
-                        <p>
-                            In October 2017, the robot became a Saudi Arabian citizen, the first robot to receive
-                            citizenship of any country. In November 2017, Sophia was named the United Nations
-                            Development
-                            Programme's first ever Innovation Champion, and the first non-human to be given any United
-                            Nations title.
-                        </p>
+        <main>
+            <section id="loadingBox" class="notification">Loading ...</section>
 
-                        <footer>
-                            <small class="author">
-                                Vladimir Damov
-                            </small>
-                            <div class="text-right">
-                                <a href="viewpost.html" class="btn btn-primary btn-xs">Read more &raquo;</a>
-                            </div>
-                            <br>
-                        </footer>
-                    </article>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="images/sophia.jpg" alt="" width=100% class="img-thumbnail">
-                    <article>
-                        <header>
-                            <h2>Sofia - the social Robot?</h2>
-                        </header>
-                        <p>
-                            Sophia is a social humanoid robot developed by Hong Kong-based company Hanson Robotics.
-                            Sophia
-                            was activated on April 19, 2015 and made her first public appearance at South by Southwest
-                            Festival (SXSW) in mid-March 2016 in Austin, Texas, United States. She is able to display
-                            more than 62 facial expressions.
-                        </p>
-                        <p>
-                            Sophia has been covered by media around the globe and has participated in many high-profile
-                            interviews. While interviewers around the world have been impressed by the sophistication of
-                            many of Sophia's responses to their questions, the bulk of Sophia's meaningful statements
-                            are
-                            believed by experts to be somewhat scripted.
-                        </p>
-                        <p>
-                            In October 2017, the robot became a Saudi Arabian citizen, the first robot to receive
-                            citizenship of any country. In November 2017, Sophia was named the United Nations
-                            Development
-                            Programme's first ever Innovation Champion, and the first non-human to be given any United
-                            Nations title.
-                        </p>
+            <section id="infoBox" class="notification">Info</section>
 
-                        <footer>
-                            <small class="author">
-                                Vladimir Damov
-                            </small>
-                            <div class="text-right">
-                                <a href="viewpost.html" class="btn btn-primary btn-xs">Read more &raquo;</a>
-                            </div>
-                            <br>
-                        </footer>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-<footer>
-    <div class="navbar navbar-default navbar-primary text-uppercase">
-        <div class="container modal-footer" style="color: white;">
-            &copy; 2018 - Software University Foundation
-        </div>
-    </div>
-</footer>
-</body>
+            <section id="errorBox" class="notification">Error</section>
+
+            <section id="viewHome">
+                <h1>Welcome</h1>
+				<div class="content">
+					<p>Welcome to our book library.</p>
+				</div>
+				<div class="homeImage">
+					<img src="images/library.jpeg">
+				</div>
+            </section>
+
+            <section id="viewLogin">
+                <h1>Please login</h1>
+				<div class="content">
+					<form id="formLogin">
+						<div>Username:</div>
+						<div><input type="text" name="username" required /></div>
+						<div>Password:</div>
+						<div><input type="password" name="passwd" required /></div>
+						<div><input type="submit" value="Login" /></div>
+					</form>
+				</div>
+            </section>
+
+            <section id="viewRegister">
+                <h1>Please register here</h1>
+				<div class="content">
+					<form id="formRegister">
+						<div>Username:</div>
+						<div><input type="text" name="username" required /></div>
+						<div>Password:</div>
+						<div><input type="password" name="passwd" required /></div>
+						<div><input type="submit" value="Register" /></div>
+					</form>
+				</div>
+            </section>
+
+            <section id="viewBooks">
+                <h1>Books</h1>
+				<div class="content">
+					<div id="books">
+						<table>
+							<tr>
+								<th>Title</th>
+								<th>Author</th>
+								<th>Description</th>
+								<th>Actions</th>
+							</tr>
+							<tr>
+								<td>Book title</td>
+								<td>Book author</td>
+								<td>Book description</td>
+								<td>
+									<a href="#">[Delete]</a>
+									<a href="#">[Edit]</a>
+								</td>
+							</tr>
+							<tr>
+								<td>Book title</td>
+								<td>Book author</td>
+								<td>Book description</td>
+								<td>
+									<a href="#">[Delete]</a>
+									<a href="#">[Edit]</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<div class="wrapper">
+					<div class="col-sm-12">
+						<ul id="pagination-demo" class="pagination"></ul>
+					</div>
+				</div>
+            </section>
+
+            <section id="viewCreateBook">
+                <h1>Create new book</h1>
+				<div class="content">
+					<form id="formCreateBook">
+						<div>Title:</div>
+						<div><input type="text" name="title" required /></div>
+						<div>Author:</div>
+						<div><input type="text" name="author" required /></div>
+						<div>Description:</div>
+						<div><textarea name="description" rows="10" required></textarea></div>
+						<div><input type="submit" value="Create" /></div>
+					</form>
+				</div>
+            </section>
+
+            <section id="viewEditBook">
+                <h1>Edit existing book</h1>
+				<div class="content">
+					<form id="formEditBook">
+						<div><input type="hidden" name="id" required /></div>
+						<div>Title:</div>
+						<div><input type="text" name="title" required /></div>
+						<div>Author:</div>
+						<div><input type="text" name="author" required /></div>
+						<div>Description:</div>
+						<div><textarea name="description" rows="10" required></textarea></div>
+						<div><input type="submit" value="Edit" /></div>
+					</form>
+				</div>
+            </section>
+        </main>
+
+        <footer>Book Library - Simple SPA Application &copy 2018</footer>
+	</body>
 </html>
