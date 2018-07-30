@@ -195,6 +195,8 @@ function displayPaginationAndBooks(books) {
                         loadBookForEdit(books[i])
                     });
                     tr.append($(`<td>`).append(aEdit).append(aDel))
+                } else {
+                    tr.append($('<td>'))
                 }
             }
         }
