@@ -36,6 +36,7 @@ function listBooks() {
         url: BASE_URL + 'appdata/' + APP_KEY + '/books',
         headers: {Authorization: 'Kinvey ' + getCookie('authToken')}
     }).then(function (res) {
+        res = res.sort(listSort($('.sorting select').val()));
         displayPaginationAndBooks(res)
     }).catch(handleAjaxError)
 }
@@ -98,11 +99,6 @@ function saveAuthInSession(userInfo) {
     setCookie(`authToken`, userInfo._kmd.authtoken, 1);
     setCookie(`username`, userInfo.username, 1);
     setCookie(`userId`, userInfo._id, 1);
-
-
-    // sessionStorage.setItem('authToken', userInfo._kmd.authtoken);
-    // sessionStorage.setItem('username', userInfo.username);
-    // sessionStorage.setItem('userId', userInfo._id);
 }
 
 function logoutUser() {
@@ -115,7 +111,6 @@ function logoutUser() {
         eraseCookie(`username`);
         eraseCookie(`userId`);
         showHideMenuLinks();
-        $('#loggedInUser').text("");
         showHomeView();
         showInfo('Logout successful.')
     }).fail(handleAjaxError)
@@ -128,13 +123,47 @@ function signInUser(res, message) {
     showInfo(message)
 }
 
+function listSort(selected) {
+    let sorted;
+    if (selected === `Date Modified`) {
+        sorted = function (a, b) {
+            let d1 = new Date(a._kmd.lmt)
+            let d2 = new Date(b._kmd.lmt)
+            return d2 - d1;
+        }
+    }
+    else if (selected === `Date Created`) {
+        sorted = function (a, b) {
+            let d1 = new Date(a._kmd.ect)
+            let d2 = new Date(b._kmd.ect)
+            return d2 - d1;
+        }
+    } else if (selected === 'Title (A-Z)') {
+        sorted = function (a, b) {
+            return a.title.localeCompare(b.title)
+        }
+    } else if (selected === `Author (A-Z)`) {
+        sorted = function (a, b) {
+            return a.author.localeCompare(b.author)
+
+        }
+    }
+
+    return sorted;
+
+}
+
 function displayPaginationAndBooks(books) {
-    books = books.sort(function (a, b) {
-        let d1 = new Date(a._kmd.lmt)
-        let d2 = new Date(b._kmd.lmt)
-        return d2 - d1;
-    });
+    let select = $('.sorting select');
+    select.on('change', function () {
+            books = books.sort(listSort($(this).val()));
+            displayPaginationAndBooks(books)
+        }
+    );
+
+
     showView('viewBooks')
+
     let pagination = $('#pagination-demo')
     if (pagination.data("twbs-pagination")) {
         pagination.twbsPagination('destroy')

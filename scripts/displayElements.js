@@ -11,13 +11,14 @@ function showHideMenuLinks() {
         $("#linkListBooks").hide()
         $("#linkCreateBook").hide()
         $("#linkLogout").hide()
+        $('#loggedInUser').text("");
     } else { // We have logged in user
         $("#linkLogin").hide()
         $("#linkRegister").hide()
         $("#linkListBooks").show()
         $("#linkCreateBook").show()
         $("#linkLogout").show()
-        $('#loggedInUser').text("Welcome, " + getCookie('username') + "!").css('color', '#FFFFFF')
+        $('#loggedInUser').text("Welcome, " + getCookie('username') + "!");
     }
 }
 

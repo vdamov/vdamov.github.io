@@ -1,61 +1,67 @@
 body {
-	background: #f2f2f2;
+    background: #f2f2f2;
 }
 
 #menu {
-	font-size: 1.5em;
-	background: #999;
-	padding: 5px;
-	line-height: 1.5;
-	border-radius: 3px;
+    font-size: 1.5em;
+    background: #999;
+    padding: 5px;
+    line-height: 1.5;
+    border-radius: 3px;
     overflow: auto;
 }
 
 #menu a {
-	text-decoration: none;
-	padding: 5px 10px;
-	border-radius: 5px;
-	color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
 }
 
 #menu a:hover {
-	background: #BBB;
+    background: #BBB;
 }
 
 #menu a:visited {
-	color: #fff;
+    color: #fff;
 }
 
 #menu a.active {
-	background: #BBB;
+    background: #BBB;
 }
 
-#menu>#loggedInUser {
+#menu > #loggedInUser {
+    color: #FFFFFF;
     float: right;
     margin-right: 10px;
 }
 
+.sorting {
+    float: right;
+    font-size: 15px;
+}
+
 main > section {
-	display: none;
+    display: none;
 }
 
 section {
-	margin: 1em;
-	border-radius: 10px;
-	background: #fff;
+    margin: 1em;
+    border-radius: 10px;
+    background: #fff;
 }
 
 section > .content {
-	padding: 1em;
+    padding: 1em;
 }
 
 section h1 {
-	font-size: 1.5em;
-	background: #e6f7ff;
-	padding: 0.5em 1em;
-	margin: 0;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+    font-size: 1.5em;
+    background: #e6f7ff;
+    padding: 0.5em 1em;
+    margin: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 table th {
@@ -76,55 +82,57 @@ table td {
 }
 
 .notification {
-	font-size: 1.5em;
-	float: right;
+    font-size: 1.5em;
+    float: right;
     color: #ffffff;
-    padding:  0.5em 2em 0.5em 2em;
+    padding: 0.5em 2em 0.5em 2em;
     margin: 1em;
     display: none;
     position: absolute;
     top: 0;
     right: 0;
-	text-align: center;
-	border-radius: 3px;
+    text-align: center;
+    border-radius: 3px;
 }
 
 #loadingBox {
-	background: #7CB3E9;
+    background: #7CB3E9;
 }
+
 #infoBox {
-	background: #393;
+    background: #393;
 }
+
 #errorBox {
-	background: #F50;
+    background: #F50;
 }
 
 footer {
-	background: #DDD;
-	padding: 5px 10px;
-	font-size: 0.8em;
-	text-align: center;
-	border-radius: 3px;
+    background: #DDD;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    text-align: center;
+    border-radius: 3px;
 }
 
 .homeImage > img {
-	width: 100%;
-	height: 490px;
+    width: 100%;
+    height: 490px;
 }
 
 td:nth-child(1n) {
-	width: 17%;
+    width: 17%;
 }
 
 td:nth-child(2n) {
-	width: 17%;
+    width: 17%;
 }
 
 td:nth-child(3n) {
-	width: 55%;
+    width: 55%;
 }
 
 td:nth-child(4n) {
-	width: 11%;
+    width: 11%;
 }
 
